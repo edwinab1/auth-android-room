@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.login.mobi.loginapp.Database.UserDao;
+import com.login.mobi.loginapp.Database.UserDatabase;
+import com.login.mobi.loginapp.Models.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btSignIn;

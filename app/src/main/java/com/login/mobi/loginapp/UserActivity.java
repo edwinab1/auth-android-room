@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.login.mobi.loginapp.Models.User;
+
 public class UserActivity extends AppCompatActivity {
     private TextView tvUser;
 
