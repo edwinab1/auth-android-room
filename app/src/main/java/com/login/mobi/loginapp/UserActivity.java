@@ -8,16 +8,18 @@ import android.widget.TextView;
 public class UserActivity extends AppCompatActivity {
     private TextView tvUser;
 
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        user = (User) getIntent().getSerializableExtra("User");
+
         tvUser = findViewById(R.id.tvUser);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            tvUser.setText(bundle.getString("user"));
+        if (user != null) {
+            tvUser.setText("WELCOME "+user.getName() +" "+user.getLastName());
         }
     }
 }

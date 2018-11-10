@@ -20,18 +20,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp">
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
 
             <EditText
-                android:id="@+id/emailinput"
+                android:id="@+id/nameinput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
+                android:hint="Name"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="17sp" />
+            <EditText
+                android:id="@+id/lastnameinput"
+                android:layout_below="@id/nameinput"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
+                android:fontFamily="sans-serif-light"
+                android:hint="LastName"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="17sp" />
+            <EditText
+                android:id="@+id/emailinput"
+                android:layout_below="@id/lastnameinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="30dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="17sp" />
@@ -59,19 +84,19 @@
             android:src="@drawable/ic_google_white" />
 
         <Button
-            android:id="@+id/btSignIn"
+            android:id="@+id/btRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/btSignUp"
+            android:layout_above="@id/btCancel"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/button_white"
-            android:text="Sign In"
+            android:text="Register"
             android:textColor="@color/colorPrimary" />
 
         <Button
-            android:id="@+id/btSignUp"
+            android:id="@+id/btCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -79,7 +104,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/button_red"
-            android:text="Sign Up"
+            android:text="Cancel"
             android:textColor="@color/colorWhite" />
     </RelativeLayout>
 

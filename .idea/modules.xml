@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/YoutubeProjects.iml" filepath="$PROJECT_DIR$/YoutubeProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidLogin.iml" filepath="$PROJECT_DIR$/AndroidLogin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

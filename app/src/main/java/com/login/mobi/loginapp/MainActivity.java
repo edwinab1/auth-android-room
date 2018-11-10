@@ -1,6 +1,10 @@
 package com.login.mobi.loginapp;
 
+import android.app.ProgressDialog;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,11 +21,28 @@ public class MainActivity extends AppCompatActivity {
     private Button btSignUp;
     private EditText edtEmail;
     private EditText edtPassword;
+    private UserDatabase database;
+
+    private UserDao userDao;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Check User...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+
+
+        database = Room.databaseBuilder(this, UserDatabase.class, "mi-database.db")
+                .allowMainThreadQueries()
+                .build();
+
+        userDao = database.getUserDao();
 
 
         btSignIn = findViewById(R.id.btSignIn);
@@ -30,37 +51,35 @@ public class MainActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.emailinput);
         edtPassword = findViewById(R.id.passwordinput);
 
-        final DatabaseHelper dbHelper = new DatabaseHelper(this);
+
 
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!emptyValidation()) {
-                    dbHelper.addUser(new User(edtEmail.getText().toString(), edtPassword.getText().toString()));
-                    Toast.makeText(MainActivity.this, "Added User", Toast.LENGTH_SHORT).show();
-                    edtEmail.setText("");
-                    edtPassword.setText("");
-                }else{
-                    Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
-                }
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
         });
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!emptyValidation()) {
-                    User user = dbHelper.queryUser(edtEmail.getText().toString(), edtPassword.getText().toString());
-                    if (user != null) {
-                        Bundle mBundle = new Bundle();
-                        mBundle.putString("user", user.getEmail());
-                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                        intent.putExtras(mBundle);
-                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "User not found", Toast.LENGTH_SHORT).show();
-                        edtPassword.setText("");
-                    }
+                    progressDialog.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            User user = userDao.getUser(edtEmail.getText().toString(), edtPassword.getText().toString());
+                            if(user!=null){
+                                Intent i = new Intent(MainActivity.this, UserActivity.class);
+                                i.putExtra("User", user);
+                                startActivity(i);
+                                finish();
+                            }else{
+                                Toast.makeText(MainActivity.this, "Unregistered user, or incorrect", Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialog.dismiss();
+                        }
+                    }, 1000);
+
                 }else{
                     Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
