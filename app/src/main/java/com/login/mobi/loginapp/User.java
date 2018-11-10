@@ -1,8 +1,6 @@
 package com.login.mobi.loginapp;
 
-import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
